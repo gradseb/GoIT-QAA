@@ -30,6 +30,7 @@ describe("Test 1", () => {
     cy.get(':nth-child(12) > .next-bve2vl').click()
   });
 });
+
 // describe("login test", () => {
 //   it("admin login", () => {
 //     cy.visit("somesite.com");
