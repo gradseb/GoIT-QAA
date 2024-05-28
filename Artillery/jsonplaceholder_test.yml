@@ -1,0 +1,38 @@
+config:
+  target: "https://jsonplaceholder.typicode.com/"
+  phases:
+    - duration: 30 # czas trwania testu w sekundach
+      arrivalRate: 5 # liczba użytkowników na sekundę
+      name: First Test 1
+  plugins:
+    ensure:
+      thresholds:
+        - p95: 10
+        - max: 5
+        - statusCode: 200
+
+  payloads:
+    path: "payloads/posts.json" # ścieżka do pliku z danymi
+    fields:
+      - "title"
+      - "body"
+      - "userId"
+  defaults:
+    headers:
+      content-type: "application/json"
+
+scenarios:
+  - flow:
+      - get:
+          url: "{{ target }}get"
+      - post:
+          url: "{{ target }}posts"
+          json:
+            title: "title"
+            body: "body"
+            userId: "userId"
+          capture:
+            - json: "$.json"
+              as: "request"
+
+      - log: "Response is: {{ request }}"
