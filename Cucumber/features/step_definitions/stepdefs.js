@@ -1,5 +1,5 @@
 const assert = require('assert');
 
-const { Given, When, Then } = require('search_and_buy.feature');
+const { Given, When, Then } = require('@cucumber/cucumber');
 
 default: --format - options; '{"snippetInterface": "synchronous"}'
